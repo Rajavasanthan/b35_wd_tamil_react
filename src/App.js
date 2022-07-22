@@ -10,7 +10,7 @@ function App() {
   const [editUser, setEditUser] = useState({});
   let fetchData = async () => {
     try {
-      let res = await axios.get("http://localhost:3001/students");
+      let res = await axios.get("https://b35-wd-tamil-node.herokuapp.com/students");
       setUser(res.data);
     } catch (error) {
       console.log(error);
@@ -29,12 +29,12 @@ function App() {
     onSubmit: async (values) => {
       try {
         if (!isEdit) {
-          await axios.post("http://localhost:3001/student", values);
+          await axios.post("https://b35-wd-tamil-node.herokuapp.com/student", values);
           fetchData()
         } else {
           delete values._id
           await axios.put(
-            `http://localhost:3001/student/${editUser._id}`,
+            `https://b35-wd-tamil-node.herokuapp.com/${editUser._id}`,
             values
           );
           setIsEdit(false);
@@ -48,7 +48,7 @@ function App() {
 
   let handleEdit = async (id) => {
     try {
-      let student = await axios.get(`http://localhost:3001/student/${id}`);
+      let student = await axios.get(`https://b35-wd-tamil-node.herokuapp.com/${id}`);
       formik.setValues(student.data);
       setEditUser(student.data);
       setIsEdit(true);
@@ -57,7 +57,7 @@ function App() {
 
   let handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/student/${id}`);
+      await axios.delete(`https://b35-wd-tamil-node.herokuapp.com/${id}`);
       fetchData();
     } catch (error) {}
   }
